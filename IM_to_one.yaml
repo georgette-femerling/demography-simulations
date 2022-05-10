@@ -1,0 +1,24 @@
+description: Multiple-population to one big population, two-epoch demography.
+time_units: generations
+demes:
+  - name: deme0
+    epochs:
+    - {end_time: 21.2e3, start_size: 1000}
+  - name: deme1
+    epochs:
+    - {end_time: 21.2e3, start_size: 1000}
+  - name: deme2
+    epochs:
+    - {end_time: 21.2e3, start_size: 1000}
+  - name: merged
+    ancestors: [deme0,deme1,deme2]
+    proportions: [0.33,0.33,0.34]
+    start_time: 21.2e3
+    epochs:
+    - {start_size: 3000}
+migrations:
+  - demes: [deme0, deme1]
+    rate: 1e-2
+  - demes: [deme1, deme2]
+    rate: 1e-2
+
