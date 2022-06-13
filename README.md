@@ -1,2 +1,4 @@
 # demography-simulations
-Hello from computecanada
+
+Project that seeks to understand how Dstats are influenced by deep and complex population structure.
+
