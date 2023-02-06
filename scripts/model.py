@@ -4,10 +4,12 @@ import demes, demesdraw
 import msprime as ms
 
 # Population N change model
-def size_change(Ns,time_period,yaml_filename=None,plot=True,plot_filename=None,time_units="generations",generation_time=29):
+def size_change(Ns,time_period,yaml_filename=None,plot=True,plot_filename=None,time_units="years",generation_time=29):
     
-    m = demes.Builder(time_units=time_units,generation_time=generation_time)
+    if time_units == "generations":
+        generation_time=1
 
+    m = demes.Builder(time_units=time_units,generation_time=generation_time)
     current_time=np.array(time_period).sum()
 
     epochs = []
@@ -41,7 +43,9 @@ def cake_model(Ns,splits,proportions,time_period_merge,time_period_splits,migrat
     # Check arguments
     assert len(splits) == len(proportions) == len(time_period_splits), "Proportions and time period list must be the same length as number of split events."
     assert len(splits)+1 == len(time_period_merge), "Time period merge list must be the same length as number of split events + 1."
-
+    if time_units == "generations":
+        generation_time=1
+        
     merge_events = len(splits)+1
     assert len(Ns) == merge_events, "Length of Ns list must be equal to number of split events + 1"
 
@@ -138,10 +142,12 @@ def get_N_times_from_iicr(iicr,T):
     times.append(0)
     return Ns,times
 
-def size_change_from_iicr(iicr,T,yaml_filename=None,plot=True,plot_filename=None,time_units="generations",generation_time=29):
+def size_change_from_iicr(iicr,T,yaml_filename=None,plot=True,plot_filename=None,time_units="years",generation_time=29):
     """
     Takes a vector of Ns in form of iicr and T times to create a model
     """
+    if time_units == "generations":
+        generation_time=1
 
     Ns,times = get_N_times_from_iicr(iicr,T)
     
