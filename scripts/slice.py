@@ -15,12 +15,15 @@ def slice_timepoints(g,time_points,yaml_filename=None):
     
     return sliced_dict
 
-def sample_timepoints(graph, time_points_perdeme = 3, anc_end_time=100000):
+def sample_timepoints(graph,anc_end_time=100000):
     times = []
     times_dic = defaultdict()
     for deme in graph.demes:
-        deme = deme.name
-        time = np.linspace(graph[deme].end_time+1,graph[deme].start_time-1,time_points_perdeme,dtype=int) if graph[deme].start_time != float('inf') else np.linspace(graph[deme].end_time+1,graph[deme].end_time+anc_end_time,time_points_perdeme,dtype=int)
+        time = []
+        for epoch in deme.epochs:
+            start = (epoch.start_time if epoch.start_time != float('inf') else anc_end_time)
+            midway = (start + epoch.end_time)/2
+            time.extend([start-1, midway, epoch.end_time])
         times = np.concatenate([times,time])
-        times_dic[deme] = time
+        times_dic[deme.name] = time
     return np.unique(np.flip(times)),times_dic
