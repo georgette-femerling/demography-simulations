@@ -1,0 +1,67 @@
+time_units: generations
+generation_time: 1
+demes:
+- name: Ancestral
+  epochs:
+  - {end_time: 5100.0, start_size: 30000}
+- name: Split_00
+  ancestors: [Ancestral]
+  epochs:
+  - {end_time: 4100.0, start_size: 7500.0}
+- name: Split_01
+  ancestors: [Ancestral]
+  epochs:
+  - {end_time: 4100.0, start_size: 7500.0}
+- name: Split_02
+  ancestors: [Ancestral]
+  epochs:
+  - {end_time: 4100.0, start_size: 7500.0}
+- name: Split_03
+  ancestors: [Ancestral]
+  epochs:
+  - {end_time: 4100.0, start_size: 7500.0}
+- name: Merge_1
+  start_time: 4100.0
+  ancestors: [Split_00, Split_01, Split_02, Split_03]
+  proportions: [0.25, 0.25, 0.25, 0.25]
+  epochs:
+  - {end_time: 4000.0, start_size: 30000}
+- name: Split_10
+  ancestors: [Merge_1]
+  epochs:
+  - {end_time: 3000.0, start_size: 10000.0}
+- name: Split_11
+  ancestors: [Merge_1]
+  epochs:
+  - {end_time: 3000.0, start_size: 10000.0}
+- name: Split_12
+  ancestors: [Merge_1]
+  epochs:
+  - {end_time: 3000.0, start_size: 10000.0}
+- name: Merge_2
+  start_time: 3000.0
+  ancestors: [Split_10, Split_11, Split_12]
+  proportions: [0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+  epochs:
+  - {end_time: 2000.0, start_size: 10000}
+- name: Split_20
+  ancestors: [Merge_2]
+  epochs:
+  - {end_time: 1000.0, start_size: 5000.0}
+- name: Split_21
+  ancestors: [Merge_2]
+  epochs:
+  - {end_time: 1000.0, start_size: 5000.0}
+- name: Merge_3
+  start_time: 1000.0
+  ancestors: [Split_20, Split_21]
+  proportions: [0.5, 0.5]
+  epochs:
+  - {end_time: 0.0, start_size: 10000}
+migrations:
+- demes: [Split_00, Split_01, Split_02, Split_03]
+  rate: 0.0001
+- demes: [Split_10, Split_11, Split_12]
+  rate: 0.0001
+- demes: [Split_20, Split_21]
+  rate: 0.0001

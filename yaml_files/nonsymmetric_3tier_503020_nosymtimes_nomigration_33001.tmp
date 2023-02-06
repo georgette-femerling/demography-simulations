@@ -1,0 +1,24 @@
+time_units: generations
+generation_time: 1
+demes:
+- name: Ancestral
+  epochs:
+  - {end_time: 2999.0, start_size: 30000.0}
+- name: Split_00
+  ancestors: [Ancestral]
+  epochs:
+  - {end_time: 1499.0, start_size: 15000.0}
+- name: Split_01
+  ancestors: [Ancestral]
+  epochs:
+  - {end_time: 1499.0, start_size: 9000.0}
+- name: Split_02
+  ancestors: [Ancestral]
+  epochs:
+  - {end_time: 1499.0, start_size: 6000.0}
+- name: Merge_1
+  start_time: 1499.0
+  ancestors: [Split_00, Split_01, Split_02]
+  proportions: [0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+  epochs:
+  - {end_time: 0, start_size: 30000.0}
