@@ -38,7 +38,7 @@ def size_change(Ns,time_period,yaml_filename=None,plot=True,plot_filename=None,t
     return graph 
 
 # Cake model function
-def cake_model(Ns,splits,proportions,time_period_merge,time_period_splits,migration_rate=1e-4,yaml_filename=None,plot=True,plot_filename=None,time_units="generations",generation_time=29):
+def cake_model(Ns,splits,proportions,time_period_merge,time_period_splits,migration_rate=1e-4,yaml_filename=None,plot=True,plot_filename=None,time_units="generations",generation_time=1):
 
     # Check arguments
     assert len(splits) == len(proportions) == len(time_period_splits), "Proportions and time period list must be the same length as number of split events."
@@ -78,7 +78,7 @@ def cake_model(Ns,splits,proportions,time_period_merge,time_period_splits,migrat
             event = event + 1
         else: 
             assert len(previous) == len(proportions[split_i]),"Length of ancestors is not equal to proportions"
-            proportion = proportions[split_i] if len(previous) > 1 else [1]
+            proportion = proportions[split_i] if len(previous) > 1 else [1] # proportion of contribution is equivalent to the proportion of size based on N 
             name="Merge_" + str(event)
             m.add_deme(name,ancestors=previous,proportions=proportion,start_time=current_time,epochs=[dict(start_size=Ns[event],end_time=current_time-time_period_merge[event])])
             previous = [name]
