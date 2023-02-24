@@ -133,17 +133,16 @@ def get_N_times_from_iicr(iicr,T):
     """
     Takes an the inverse inferred rate of coalescence and the time points and returns the times at which size changes.
     """
-    previous_N = np.flip(iicr)[0]
+    previous_N = 0
     Ns = []
-    times = []
-    for N,time in zip(np.flip(iicr),np.flip(T)):
-        if int(N) != previous_N:
-            Ns.append(previous_N)
+    times = []  
+    for N,time in zip(iicr,T):
+        if int(N) != int(previous_N):
+            Ns.append(int(N))
             times.append(time)
             previous_N = int(N)
-    Ns.append(N)        
-    times.append(0)
-    return Ns,times
+
+    return np.flip(Ns),np.flip(times)
 
 def size_change_from_iicr(iicr,T,yaml_filename=None,plot=True,plot_filename=None,time_units="years",generation_time=29):
     """
