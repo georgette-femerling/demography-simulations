@@ -2,6 +2,43 @@
 import matplotlib.pylab as plt
 import numpy as np
 
+def plot_iicr(iirc,T): 
+    plt.plot(T, iirc)
+    plt.xticks(fontsize= 12)
+    plt.yticks(fontsize= 12)
+    plt.yscale("log")
+    plt.xscale("log")
+    plt.xlabel("time ago (years)",fontsize = 14)
+    plt.ylabel(r"IICR",fontsize = 14)
+    
+def plot_comparison(LDpop1,LDpop2,labels=["Original","Size Change"]):
+    rhos = np.logspace(-2, 2, 21)
+    
+    # plot D2
+    f = plt.figure(figsize=(10,3))
+    ax = f.add_subplot(121)
+    ax2 = f.add_subplot(122)
+
+    ax.plot(rhos,LDpop1[:,0],label=labels[0])
+    ax.plot(rhos,LDpop2[:,0],label=labels[1])
+    ax.legend()
+    ax.set_yscale("log")
+    ax.set_xscale("log")
+    ax.set_ylabel(r"$\sigma_d^2$")
+    ax.set_xlabel(r"$\rho$")
+
+    # plot DZ
+    ax2.plot(rhos,LDpop1[:,1],label=labels[0])
+    ax2.plot(rhos,LDpop2[:,1],label=labels[1])
+    ax2.legend()
+    ax2.set_yscale("log")
+    ax2.set_xscale("log")
+    ax2.set_ylabel(r"$\sigma_{Dz}$")
+    ax2.set_xlabel(r"$\rho$")
+
+    plt.tight_layout()
+    plt.show()
+    
 def plot_LD(LD_sigma, times_dic, ancestral, rhos = np.logspace(-2, 2, 21), plot_file = None, figsize = (10,20)):
     fig = plt.figure(constrained_layout=True, figsize = figsize)
     subfigs = fig.subfigures(nrows=len(LD_sigma.keys()), ncols=1)

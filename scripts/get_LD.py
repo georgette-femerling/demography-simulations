@@ -29,3 +29,19 @@ def get_LD_from_sliced_demes(sliced_dict,rhos = np.logspace(-2, 2, 21),normalize
             sigmapop = sigma.LD()[:,[sigma.names()[0].index(stat) for stat in [DD,Dz,pi]]]
             LD_dictionary[deme].append(sigmapop)
     return LD_dictionary
+
+def calculate_signal_Dz(LDpop1,LDpop2):
+    '''Calculates the Mean log difference between the two decays of Dz'''
+    x = LDpop1[:,1]
+    y = LDpop2[:,1]
+    log_diff = np.diff(np.log(x) - np.log(y)) # calculate difference
+    mld= np.mean(log_diff)
+    return mld
+
+def calculate_signal_D2(LDpop1,LDpop2):
+    '''Calculates the Mean log difference between the two decays of D2'''
+    x = LDpop1[:,0]
+    y = LDpop2[:,0]
+    log_diff = np.diff(np.log(x) - np.log(y)) # calculate difference
+    mld= np.mean(log_diff)
+    return mld
