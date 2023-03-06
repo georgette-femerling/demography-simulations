@@ -8,7 +8,7 @@ import msprime as ms
 
 def get_iirc(demes_model,pop,T=None):
     """
-    Returns two arrays: the Coalescence rate and the Inferred Inverse Coalescence Rate (Popsize)
+    Returns three arrays: the Coalescence rate, the Inferred Inverse Coalescence Rate (Popsize), and the probabilities that a chosen pair or lineages has not coalesced
     """
     m = ms.Demography.from_demes(demes_model)
     debug = m.debug()
@@ -17,10 +17,26 @@ def get_iirc(demes_model,pop,T=None):
             np.linspace(0, 1000, 2001),
             np.linspace(1000, 1.5e4, 401)[1:]
         ])
-    R, _ = debug.coalescence_rate_trajectory(T, {pop: 2})
+    R, P = debug.coalescence_rate_trajectory(T, {pop: 2})
     inversed_R = 1/(2*R)
 
-    return R,inversed_R,T
+    return R,inversed_R,P,T
+
+def get_iicr_croosspop(demes_model,pop1,pop2,T=None):
+    """
+    Returns two arrays: the Coalescence rate and the Inferred Inverse Coalescence Rate (Popsize)
+    """
+    m = ms.Demography.from_demes(demes_model)
+    debug = m.debug()
+    if T == None:
+        T = np.concatenate([
+            np.linspace(0, 1000, 2001),
+            np.linspace(1000, 1.0e4, 401)[1:]
+        ])
+    R, P = debug.coalescence_rate_trajectory(T, {pop1: 2,pop2: 2})
+    inversed_R = 1/(2*R)
+
+    return R,inversed_R,P,T
 
 # Population N change model
 def get_N_times_from_IIRC(IIRC,T):

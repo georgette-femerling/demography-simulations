@@ -1,0 +1,8 @@
+time_units: generations
+generation_time: 1
+demes:
+- name: Deme
+  epochs:
+  - {end_time: 4000.0, start_size: 20000.0}
+  - {end_time: 1000.0, start_size: 2000.0}
+  - {end_time: 0.0, start_size: 10000.0}

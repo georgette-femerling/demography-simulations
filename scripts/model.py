@@ -128,6 +128,22 @@ def get_iicr(demes_model,pop,T=None):
 
     return R,inversed_R,T
 
+def get_iicr_croosspop(demes_model,pop1,pop2,T=None):
+    """
+    Returns two arrays: the Coalescence rate and the Inferred Inverse Coalescence Rate (Popsize)
+    """
+    m = ms.Demography.from_demes(demes_model)
+    debug = m.debug()
+    if T == None:
+        T = np.concatenate([
+            np.linspace(0, 1000, 2001),
+            np.linspace(1000, 1.0e4, 401)[1:]
+        ])
+    R, _ = debug.coalescence_rate_trajectory(T, {pop1: 2,pop2: 2})
+    inversed_R = 1/(2*R)
+
+    return R,inversed_R,T
+
 # Population N change model
 def get_N_times_from_iicr(iicr,T):
     """

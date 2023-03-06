@@ -1,0 +1,16 @@
+# Demographic models for collaboration with Chikhi Lab
+
+* ### Objective
+    *  Estimate a IM model from the IICR of simulated demographies.
+
+* ### Contents: 8 Models, 2 files per model
+    * .iicr file contains the estimated IICR along with the time steps. 
+        Rows:
+        * [1] Times in generations
+        * [2] Sizes(iicr)
+    * .mscommand file contains the ms command that corresponds to the inferred demography. 
+        > created using demes API:  `demes.to_ms(model_sc,N0=N)`
+
+
+---
+contact: Georgette Femerling, maria.femerlingromero@mail.mcgill.ca

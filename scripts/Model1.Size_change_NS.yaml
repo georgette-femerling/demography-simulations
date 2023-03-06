@@ -1,0 +1,11 @@
+time_units: generations
+generation_time: 1
+demes:
+- name: Deme
+  epochs:
+  - {end_time: 10000.0, start_size: 11500.0}
+  - {end_time: 7000.0, start_size: 1150.0}
+  - {end_time: 6000.0, start_size: 5750.0}
+  - {end_time: 4000.0, start_size: 1916.6666666666667}
+  - {end_time: 1000.0, start_size: 23000.0}
+  - {end_time: 0.0, start_size: 1150.0}
